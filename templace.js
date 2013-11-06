@@ -44,12 +44,12 @@
 
                         var name = varTmpl[i].toString();
 
-                        if(typeof(b[name]) !== "undefined"){ 
+                        if(typeof(b[name]) === "undefined"){ b[name] = '';}
 
-                            if(_conf.arrayCallback.call)_conf.arrayCallback.call(b[name]);
+                        if(_conf.arrayCallback.call)_conf.arrayCallback.call(b[name]);
 
-                            _html = _html.replace(new RegExp('{{'+ name +'}}',"gm"), b[name]);
-                        }
+                        _html = _html.replace(new RegExp('{{'+ name +'}}',"gm"), b[name]);
+                        
                     }
 
                    return _html;
