@@ -39,11 +39,11 @@
                 function _condional(_c){
                     
                     var _condicao = _c || condicao;
-                                        
+
                     for(var ic in _condicao){
                         
                         var _cond = _condicao[ic].match(/(?:\{\{(.*?)\=(.*?)\}\}(.*)\{\{\/(?:\1)\}\})/mi);
-                        
+
                         if(typeof _cond === 'object' && _cond.length === 4){
                             
                             var context = _cond[0], 
@@ -51,14 +51,13 @@
                                 dataTest = _cond[1],
                                 tmpl = _cond[3];
                             
-                            var more_cond = tmpl.match(_regx.condicao);
+                            var nova = tmpl.match(_regx.condicao);
                       
-                            if(more_cond !== null && more_cond.length > 0){
+                            if(nova !== null && nova.length > 0){
 
-                                tmpl = _condional(more_cond);
-                                //log('nova', nova, tmpl, _cond[3]);
+                                _condional(nova);
                             }
-
+                                                       
                             if(typeof data === 'object' && typeof data[dataTest] !== 'undefined'){
                                 
                                 dataTest = data[dataTest];
@@ -71,13 +70,11 @@
                                 
                                 template = template.replace(context, tmpl);
                             }else{
-                                
+                                log('test-false', regTest, dataTest);
                                 template = template.replace(context, '');
                             }
-                            
-                            return tmpl;
                         }
-                        
+
                         _cond = undefined;
                     }
                 }
